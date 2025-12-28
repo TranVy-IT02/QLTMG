@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Trường Mẫu Giáo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Trang chủ</a>
+                </li>
+                {%for c in cates%}
+                <li class="nav-item">
+                    <a class="nav-link" href="/?cate_id={{c.id}}">{{c.name}}</a>
+                </li>
+                {%endfor%}
+            </ul>
+
+            {%if current_user.is_authenticated%}
+                <a class="nav-link active" href="/login">
+                    <img src="{{current_user.avatar}}" width="25">
+                    Chao {{current_user.name}}!
+                </a>
+            {%else%}
+            <li class="nav-item">
+                <a class="nav-link active" href="/login">&#xF4D7;Đăng nhập</a>
+            </li>
+            {%endif%}
+            <li class="nav-item">
+                <a class="nav-link active" href="/login">&#xF4D7;Đăng xuất</a>
+            </li>
+            <form class="d-flex" method="get">
+                <input class="form-control me-2" type="text" placeholder="Nhập từ khóa..." name="q">
+                <button class="btn btn-primary" type="button">Tìm</button>
+            </form>
+        </div>
+    </div>
+</nav>

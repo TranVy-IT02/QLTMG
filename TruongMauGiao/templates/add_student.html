@@ -1,0 +1,107 @@
+{%extends 'layout/base.html'%}
+<body>
+{%block content%}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Thêm học sinh</h5>
+            </div>
+
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Họ tên học sinh</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Giới tính</label>
+                        <div class="col-sm-9">
+                            <select name="gender" class="form-control" required>
+                                <option value="">-- Chọn --</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Lớp</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="class_name" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Tên phụ huynh</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="parent_name" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">SĐT phụ huynh</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="parent_phone" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <label class="col-sm-3 col-form-label">Ảnh học sinh</label>
+                        <div class="col-sm-9">
+                            <input type="file" name="image" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="text-end">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                            Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            Lưu học sinh
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-3">
+    <h2>Danh sách trẻ</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>John</td>
+            <td>Doe</td>
+            <td>john@example.com</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>Moe</td>
+            <td>mary@example.com</td>
+        </tr>
+        <tr>
+            <td>July</td>
+            <td>Dooley</td>
+            <td>july@example.com</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{%endblock%}

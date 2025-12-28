@@ -1,0 +1,74 @@
+import json
+from datetime import datetime
+from enum import Enum as RoleEnum
+
+from flask_login import UserMixin
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime, Enum, Boolean, Float
+from sqlalchemy.orm import relationship
+
+from TruongMauGiao import db, app
+
+
+class Base(db.Model):
+    __abstract__ = True
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(150), nullable=False, unique=True)
+    created_date = Column(DateTime, default=datetime.now())
+    active = Column(Boolean, default=True)
+
+
+class UserRole(RoleEnum):
+    USER = 1
+    ADMIN = 2
+
+
+class User(Base, UserMixin):
+    username = Column(String(150), nullable=False, unique=True)
+    password = Column(String(150), nullable=False)
+    avatar = Column(String(500),
+                    default="https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg")
+    role = Column(Enum(UserRole), default=UserRole.USER)
+
+    def __str__(self):
+        return self.name
+
+
+class Category(Base):
+    hocPhi= Column(Float, nullable=False)
+    students = relationship('Student', backref="category", lazy=True)
+
+
+class Student(Base):
+    image = Column(String(500),
+                   default="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25_3__1.png")
+    nameParent = Column(String(150), nullable=False)
+    SDT = Column(String(10), nullable=False)
+    cate_id = Column(Integer, ForeignKey(Category.id), nullable=False)
+    description = Column(Text)
+
+    def __str__(self):
+        return self.name
+
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        c1 = Category(name="Mầm",hocPhi=100000)
+        c2 = Category(name="Chồi",hocPhi=150000)
+        c3 = Category(name="Lá",hocPhi=200000)
+
+        db.session.add_all([c1, c2, c3])  # tạo script
+        with open("data/student.json", encoding="utf-8") as f:
+            students = json.load(f)
+
+            for p in students:
+                stud = Student(**p)
+                db.session.add(stud)
+        import hashlib
+
+        u1 = User(name="User", username="user", password=hashlib.md5("123".encode("utf-8")).hexdigest())
+        u2 = User(name="Admin", username="admin", password=hashlib.md5("123".encode("utf-8")).hexdigest())
+
+        db.session.add(u1)
+        db.session.add(u2)
+        db.session.commit()  # run script
