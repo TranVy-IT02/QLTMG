@@ -1,11 +1,9 @@
 import json
 from datetime import datetime
 from enum import Enum as RoleEnum
-
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, ForeignKey, Text, DateTime, Enum, Boolean, Float
 from sqlalchemy.orm import relationship
-
 from TruongMauGiao import db, app
 
 
@@ -41,6 +39,7 @@ class Category(Base):
 class Student(Base):
     image = Column(String(500),
                    default="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/d/i/dien-thoai-samsung-galaxy-s25_3__1.png")
+    gioiTinh=Column(String(10), nullable=False)
     nameParent = Column(String(150), nullable=False)
     SDT = Column(String(10), nullable=False)
     cate_id = Column(Integer, ForeignKey(Category.id), nullable=False)

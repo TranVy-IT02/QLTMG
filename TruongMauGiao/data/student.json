@@ -4,6 +4,7 @@
     "name": "Vy",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nam",
     "SDT": 29000000,
     "cate_id": 2
   },
@@ -12,6 +13,7 @@
     "name": "Nhi",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nam",
     "SDT": 29000000,
     "cate_id": 2
   },
@@ -20,6 +22,7 @@
     "name": "Linh",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 2
   },
@@ -28,6 +31,7 @@
     "name": "Nhu",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 3
   },
@@ -36,6 +40,7 @@
     "name": "Khoa",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 3
   },
@@ -44,6 +49,7 @@
     "name": "Nhu Y",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 1
   },
@@ -52,6 +58,7 @@
     "name": "Thinh",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 1
   },
@@ -60,6 +67,7 @@
     "name": "Duong",
     "image": "https://static.vecteezy.com/system/resources/previews/005/544/753/original/profile-icon-design-free-vector.jpg",
     "nameParent": "Anh",
+    "gioiTinh": "Nu",
     "SDT": 29000000,
     "cate_id": 2
   }

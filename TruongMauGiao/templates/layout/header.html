@@ -17,18 +17,22 @@
             </ul>
 
             {%if current_user.is_authenticated%}
+            <li class="nav-item">
                 <a class="nav-link active" href="/login">
                     <img src="{{current_user.avatar}}" width="25">
                     Chao {{current_user.name}}!
                 </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link active" href="/logout">&#xF4D7;Đăng xuất</a>
+            </li>
             {%else%}
             <li class="nav-item">
                 <a class="nav-link active" href="/login">&#xF4D7;Đăng nhập</a>
             </li>
             {%endif%}
-            <li class="nav-item">
-                <a class="nav-link active" href="/login">&#xF4D7;Đăng xuất</a>
-            </li>
+
             <form class="d-flex" method="get">
                 <input class="form-control me-2" type="text" placeholder="Nhập từ khóa..." name="q">
                 <button class="btn btn-primary" type="button">Tìm</button>

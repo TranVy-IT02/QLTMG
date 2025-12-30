@@ -7,7 +7,7 @@ app.secret_key="ahgfsdkhadsn"
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root@localhost/studentdb?charset=utf8mb4"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-app.config["PAGE_SIZE"] = 3
+app.config["PAGE_SIZE"] = 10
 
 db = SQLAlchemy(app)
 login=LoginManager(app)

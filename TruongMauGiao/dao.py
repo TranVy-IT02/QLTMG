@@ -48,6 +48,7 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 
+
 def get_student_by_id(id):
     # with open("data/student.json", encoding="utf-8") as f:
     #     students = json.load(f)
