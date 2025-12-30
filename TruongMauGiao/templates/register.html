@@ -1,0 +1,86 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 420px">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <h4 class="text-center mb-4">Đăng ký tài khoản</h4>
+
+            {% if err_msg %}
+            <div class="alert alert-danger text-center">
+                {{ err_msg }}
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+
+                <!-- Họ tên -->
+                <div class="mb-3">
+                    <input class="form-control"
+                           name="name"
+                           placeholder="Họ và tên"
+                           value="{{ request.form.name }}"
+                           required>
+                </div>
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <input class="form-control {% if 'username' in err_msg|lower %}is-invalid{% endif %}"
+                           name="username"
+                           placeholder="Tên đăng nhập"
+                           value="{{ request.form.username }}"
+                           required>
+                    {% if 'username' in err_msg|lower %}
+                    <div class="invalid-feedback">
+                        Tên đăng nhập đã tồn tại
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <input class="form-control"
+                           type="password"
+                           name="password"
+                           placeholder="Mật khẩu"
+                           required>
+                </div>
+
+                <!-- Confirm password -->
+                <div class="mb-3">
+                    <input class="form-control {% if 'khớp' in err_msg|lower %}is-invalid{% endif %}"
+                           type="password"
+                           name="confirm"
+                           placeholder="Nhập lại mật khẩu"
+                           required>
+                    {% if 'khớp' in err_msg|lower %}
+                    <div class="invalid-feedback">
+                        Mật khẩu không khớp
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Avatar -->
+                <div class="mb-3">
+                    <label class="form-label">Ảnh đại diện</label>
+                    <input class="form-control"
+                           type="file"
+                           name="avatar"
+                           accept="image/*">
+                </div>
+
+                <button class="btn btn-primary w-100">
+                    Đăng ký
+                </button>
+            </form>
+
+            <p class="text-center mt-3 mb-0">
+                Đã có tài khoản?
+                <a href="/login">Đăng nhập</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

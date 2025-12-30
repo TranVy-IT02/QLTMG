@@ -1,0 +1,43 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Đăng nhập{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 400px">
+    <h3 class="text-center mb-4">Đăng nhập</h3>
+
+    {% if err_msg %}
+    <div class="alert alert-danger text-center">
+        {{ err_msg }}
+    </div>
+    {% endif %}
+
+    <form method="post">
+        <div class="mb-3">
+            <input
+                class="form-control"
+                name="username"
+                placeholder="Tên đăng nhập"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <input
+                class="form-control"
+                type="password"
+                name="password"
+                placeholder="Mật khẩu"
+                required
+            >
+        </div>
+
+        <button class="btn btn-primary w-100">Đăng nhập</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Chưa có tài khoản?
+        <a href="/register">Đăng ký</a>
+    </p>
+</div>
+{% endblock %}

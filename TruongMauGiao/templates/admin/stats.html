@@ -1,0 +1,60 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+
+<h3> Thống kê</h3>
+<hr>
+
+
+<h5> Sĩ số từng lớp</h5>
+<ul>
+    {% for name, count in class_stats %}
+        <li>{{ name }}: {{ count }} trẻ</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+
+<h5> Tổng thu theo tháng</h5>
+<canvas id="feeChart" height="100"></canvas>
+
+<hr>
+
+
+<h5> Tỷ lệ học sinh nam / nữ</h5>
+<canvas id="genderChart" height="100"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+/* ===== Biểu đồ doanh thu ===== */
+const feeLabels = [{% for m, _ in fee_stats %}'Tháng {{ m|int }}',{% endfor %}];
+const feeData = [{% for _, t in fee_stats %}{{ t }},{% endfor %}];
+
+new Chart(document.getElementById('feeChart'), {
+    type: 'bar',
+    data: {
+        labels: feeLabels,
+        datasets: [{
+            label: 'Doanh thu',
+            data: feeData,
+        }]
+    }
+});
+
+/* ===== Biểu đồ giới tính ===== */
+const genderLabels = [{% for g, _ in gender_stats %}'{{ g }}',{% endfor %}];
+const genderData = [{% for _, c in gender_stats %}{{ c }},{% endfor %}];
+
+new Chart(document.getElementById('genderChart'), {
+    type: 'pie',
+    data: {
+        labels: genderLabels,
+        datasets: [{
+            data: genderData,
+        }]
+    }
+});
+</script>
+
+{% endblock %}
