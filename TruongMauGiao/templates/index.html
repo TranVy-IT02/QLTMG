@@ -4,14 +4,15 @@
 
 <div class="row">
     {%if current_user.is_authenticated%}
-    <div class="col-md-3 col 12" style="padding: 0.7rem">
+    <div class="col-md-4 col 12" style="padding: 0.7rem">
         <div class="card">
             <img class="card-img-top" src="{{current_user.avatar}}" alt="{{current_user.name}}">
             <div class="card-body">
                 <h4 class="card-title">{{current_user.name}}</h4>
 
             </div>
-            <a href="{{url_for('add_student')}}" class="btn btn-primary">Xem thông tin trẻ</a>
+            <a href="{{url_for('add_student_route')}}" class="btn btn-primary mt-3">Xem thông tin trẻ</a>
+
         </div>
     </div>
     {%endif%}

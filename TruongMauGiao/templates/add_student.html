@@ -4,7 +4,6 @@
 
 <div class="row justify-content-center">
     <div class="col-md-8">
-
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0">Thêm học sinh</h5>
@@ -23,7 +22,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Giới tính</label>
                         <div class="col-sm-9">
-                            <select name="gender" class="form-control" required>
+                            <select name="gioiTinh" class="form-control" required>
                                 <option value="">-- Chọn --</option>
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
@@ -34,21 +33,21 @@
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Lớp</label>
                         <div class="col-sm-9">
-                            <input type="text" name="class_name" class="form-control" required>
+                            <input type="text" name="Lop" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Tên phụ huynh</label>
                         <div class="col-sm-9">
-                            <input type="text" name="parent_name" class="form-control" required>
+                            <input type="text" name="nameParent" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">SĐT phụ huynh</label>
                         <div class="col-sm-9">
-                            <input type="text" name="parent_phone" class="form-control" required>
+                            <input type="text" name="SDT" class="form-control" required>
                         </div>
                     </div>
 
@@ -63,15 +62,14 @@
                         <a href="{{ url_for('index') }}" class="btn btn-secondary">
                             Quay lại
                         </a>
-                        <button type="submit" class="btn btn-primary">
+                        <a href="{{ url_for('add_student_route') }}" class="btn btn-primary">
                             Lưu học sinh
-                        </button>
+                        </a>
                     </div>
 
                 </form>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -83,18 +81,38 @@
             <th>Avatar</th>
             <th>Tên trẻ</th>
             <th>Giới tính</th>
+            <th>Lớp</th>
             <th>Tên phụ huynh</th>
             <th>SDT</th>
+            <th>Sức khỏe của trẻ</th>
+            <th>Tiền ăn thêm</th>
+            <th>Học phí</th>
         </tr>
         </thead>
         {%for p in studs%}
         <tbody>
         <tr>
             <th><img src="{{p.image}}" width="25"></th>
-            <td>{{p.name}}</td>
+            <td>
+                <a href="student_details.html">
+                    {{p.name}}
+                </a>
+            </td>
             <th>{{p.gioiTinh}}</th>
+            <th>{{p.category.name}}</th>
             <td>{{p.nameParent}}</td>
             <td>{{p.SDT}}</td>
+            <td>
+                <a href="{{ url_for('health_record', id=p.id)}}" class="btn btn-primary mt-3">Thông tin sức khỏe của trẻ</a>
+            </td>
+            <td>{{p.tienAnThem}}</td>
+            <td>
+                {{p.category.hocPhi}}
+                <a href="{{ url_for('export_invoice', id=p.id)}}" class="btn btn-primary mt-3">Thu học phí</a>
+            </td>
+            <td>
+                <a href="{{url_for('delete_student', id=p.id)}}" class="btn btn-danger mt-3">Xóa</a>
+            </td>
         </tr>
         </tbody>
         {%endfor%}

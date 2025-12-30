@@ -1,0 +1,12 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<div class="mt-4"><h2>Hóa đơn học phí</h2>
+    <p><strong>Tên học sinh:</strong> {{ stud.name }}</p>
+    <p><strong>Lớp:</strong> {{ stud.category.name }}</p>
+    <p><strong>Phụ huynh:</strong> {{ stud.nameParent }} ({{ stud.SDT }})</p>
+    <p><strong>Ngày thu:</strong> {{ invoice.ngayThu }}</p>
+    <p><strong>Học phí:</strong> {{ stud.category.hocPhi }}</p>
+    <p><strong>Tiền ăn thêm:</strong> {{ stud.tienAnThem }}</p> <h4><strong>Tổng cộng:</strong> {{ invoice.tongTien }}
+    </h4>
+</div>
+{% endblock %}

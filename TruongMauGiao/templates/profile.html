@@ -1,0 +1,70 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 420px">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <h4 class="text-center mb-4">Chỉnh sửa hồ sơ</h4>
+
+            {% if success_msg %}
+            <div class="alert alert-success text-center">
+                {{ success_msg }}
+            </div>
+            {% endif %}
+
+            {% if err_msg %}
+            <div class="alert alert-danger text-center">
+                {{ err_msg }}
+            </div>
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                <!-- Họ và tên -->
+                <div class="mb-3">
+                    <input class="form-control"
+                           name="name"
+                           placeholder="Họ và tên"
+                           value="{{ current_user.name }}"
+                           required>
+                </div>
+
+                <!-- Username (không đổi) -->
+                <div class="mb-3">
+                    <input class="form-control"
+                           name="username"
+                           value="{{ current_user.username }}"
+                           disabled>
+                </div>
+
+                <!-- Mật khẩu mới -->
+                <div class="mb-3">
+                    <input class="form-control"
+                           type="password"
+                           name="password"
+                           placeholder="Nhập mật khẩu mới (để trống nếu không đổi)">
+                </div>
+
+                <div class="mb-3">
+                    <input class="form-control"
+                           type="password"
+                           name="confirm"
+                           placeholder="Nhập lại mật khẩu mới">
+                </div>
+
+                <!-- Avatar -->
+                <div class="mb-3 text-center">
+                    <label class="form-label">Ảnh đại diện</label>
+                    <div class="mb-2">
+                        <img src="{{ current_user.avatar }}" width="120" class="rounded-circle">
+                    </div>
+                    <input class="form-control" type="file" name="avatar" accept="image/*">
+                </div>
+
+                <button class="btn btn-primary w-100">Cập nhật hồ sơ</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

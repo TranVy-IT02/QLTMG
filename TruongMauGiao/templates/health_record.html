@@ -1,0 +1,157 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+
+<div class="row mb-4">
+    <!-- THÔNG TIN HỌC SINH -->
+    <div class="col-md-4">
+        <div class="card">
+            <img class="card-img-top" src="{{ stud.image }}" alt="{{ stud.name }}">
+            <div class="card-body">
+                <h4 class="card-title">{{ stud.name }}</h4>
+                <p class="card-text">Phụ huynh: {{ stud.nameParent }}</p>
+                <p class="card-text">SĐT: {{ stud.SDT }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM THÊM SỨC KHỎE -->
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Ghi nhận sức khoẻ hôm nay
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Cân nặng (kg)</label>
+                            <input type="number" step="0.1"
+                                   name="weight" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Nhiệt độ (°C)</label>
+                            <input type="number" step="0.1"
+                                   name="temperature" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Ghi chú</label>
+                        <textarea name="note" class="form-control" rows="2"></textarea>
+                    </div>
+
+                    <button class="btn btn-success">
+                        ➕ Lưu ghi nhận
+                    </button>
+                    <a href="/" class="btn btn-secondary">
+                        ⬅ Quay lại
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- LỊCH SỬ SỨC KHỎE -->
+<div class="card">
+    <div class="card-header">
+        Lịch sử sức khoẻ
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Ngày</th>
+                    <th>Cân nặng (kg)</th>
+                    <th>Nhiệt độ</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for r in records %}
+                <tr class="{% if r.is_fever %}table-danger{% endif %}">
+                    <td>{{ r.record_date.strftime('%d/%m/%Y') }}</td>
+                    <td>{{ r.weight }}</td>
+                    <td>{{ r.temperature }}</td>
+                    <td>
+                        {% if r.is_fever %}
+                            <span class="badge bg-danger">⚠ Sốt</span>
+                        {% else %}
+                            <span class="badge bg-success">Bình thường</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ r.note }}</td>
+                    <td>
+                        <!-- NÚT SỬA -->
+                        <button class="btn btn-sm btn-warning"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal{{ r.id }}">
+                            Sửa
+                        </button>
+
+                        <!-- NÚT XÓA -->
+                        <a href="/health/{{ r.id }}/delete"
+                           class="btn btn-sm btn-danger"
+                           onclick="return confirm('Xóa ghi nhận này?')">
+                            Xóa
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- MODAL CHỈNH SỬA -->
+                <div class="modal fade" id="editModal{{ r.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <form method="post" action="/health/{{ r.id }}/edit">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Chỉnh sửa sức khỏe</h5>
+                                    <button type="button" class="btn-close"
+                                            data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label>Cân nặng (kg)</label>
+                                        <input type="number" step="0.1"
+                                               name="weight"
+                                               value="{{ r.weight }}"
+                                               class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Nhiệt độ (°C)</label>
+                                        <input type="number" step="0.1"
+                                               name="temperature"
+                                               value="{{ r.temperature }}"
+                                               class="form-control" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Ghi chú</label>
+                                        <textarea name="note"
+                                                  class="form-control">{{ r.note }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary">Lưu</button>
+                                    <button type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal">
+                                        Hủy
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
